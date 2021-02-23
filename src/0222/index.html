@@ -10,15 +10,19 @@
         margin: 0;
         padding: 0;
       }
+      body > div {
+        display: flex;
+        justify-content: center;
+      }
       .search-box {
         width: 100%;
-        height: 28px;
+        height: 80px;
         display: flex;
         justify-content: center;
       }
       .serach-form {
-        width: 150px;
-        height: 28px;
+        width: 50px;
+        height: 80px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -27,8 +31,16 @@
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        box-shadow: 0 0 10px #ccc;
+        outline: none;
+        border: none;
+        box-shadow: 0 0 20px 0 #ccc;
+        transition: margin-left 1s;
       }
+      .search-input-div > input:focus {
+        outline: none;
+        border: none;
+      }
+
       .search-input-button {
         box-sizing: border-box;
         width: 50px;
@@ -36,22 +48,188 @@
         background: url("s.png") no-repeat center center;
         border: none;
       }
-      .search-input-text {
-        width: 100px;
-        height: 25px;
-        border: 1px solid #ccc;
-        border-radius: 25px;
+
+      .search-input-button:hover {
+        cursor: pointer;
       }
 
-      .search-input-text:hover,
+      .search-input-text {
+        position: absolute;
+        z-index: 2;
+        width: 50px;
+        height: 35px;
+        outline: none;
+        border: none;
+        text-shadow: 0 0 10px #ccc;
+
+        border-radius: 20px;
+        box-shadow: 0 0 25px 0 #ccc, 0 20px 25px 0 rgba(0, 0, 0, 0.2);
+
+        opacity: 0;
+        font-weight: bolder;
+        letter-spacing: 0.1em;
+
+        transition: all 1s;
+      }
+
+      .search-input-text:hover {
+        cursor: pointer;
+      }
       .search-input-text:focus {
-        outline: 1px solid blue;
+        width: 150px;
+        opacity: 1;
+        cursor: text;
+      }
+      .search-input-text:focus ~ .search-input-div {
+        background-color: lightblue;
+        margin-left: 150px;
+        z-index: 2;
+      }
+      /* 第二个 */
+      .container {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto;
+        padding: 0;
+      }
+
+      .search-img {
+        position: absolute;
+        z-index: 1;
+        width: 50px;
+        height: 50px;
+        display: absolute;
+        border-radius: 50%;
+        background: url("s.png") center center no-repeat;
+        box-shadow: 0 0 20px 0 #ccc;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        background-color: lightblue;
+        transition: all 1s;
+      }
+      .search-img:hover {
+        cursor: pointer;
+
+        background-color: #fff;
+      }
+      .search-in {
+        position: absolute;
+        /* 层叠在search上，此时的focus为input的，虽然透明度为1，但仍在dom树中 */
+        z-index: 2;
+        width: 50px;
+        height: 50px;
+        margin: auto;
+        outline: none;
+        border: none;
+        border-radius: 25px;
+        background-color: lightblue;
+        font-weight: bolder;
+        text-shadow: 0 0 25px 0 crimson, 0 20px 25px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 15px 0 #ccc, 0 10px 10px 0 #ccc;
+        transition: all 1s;
+        opacity: 0;
+        letter-spacing: 0.1em;
+      }
+      .search-in:hover {
+        cursor: pointer;
+      }
+      .search-in:focus {
+        width: 300px;
+        z-index: 1;
+        opacity: 1;
+        cursor: text;
+      }
+      .search-in:focus ~ .search-img {
+        margin-left: 300px;
+        z-index: 1;
+        background-image: none;
+        background-color: #fff;
+      }
+      .search-in:focus ~ .search-img::before {
+        content: "";
+        position: absolute;
+        margin: auto;
+        width: 25px;
+        height: 2px;
+        background-color: lightblue;
+        transform: rotate(45deg);
+      }
+      .search-in:focus ~ .search-img::after {
+        content: "";
+        position: absolute;
+        margin: auto;
+        width: 2px;
+        height: 25px;
+        background-color: lightblue;
+        transform: rotate(45deg);
+      }
+      .search-in::placeholder {
+        opacity: 0.5;
+        font-weight: bolder;
+      }
+      /* 水池 */
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .container-water {
+        position: relative;
+        width: 50px;
+        height: 50px;
+        margin: 0 auto;
+        border-radius: 50%;
+        border: 1px solid lightblue;
+        overflow: hidden;
+      }
+      .water1 {
+        position: absolute;
+        margin-top: 30px;
+        width: 160px;
+        height: 160px;
+
+        border-radius: 60px;
+        background-color: rgb(173, 216, 230);
+        animation: rotate 4s linear infinite;
+      }
+      .water1::before {
+        content: "";
+        position: absolute;
+
+        margin-top: -10px;
+        margin-left: -10px;
+        width: 180px;
+        height: 180px;
+        border-radius: 80px;
+        background-color: rgba(173, 216, 230, 0.6);
+        transform: rotate(20deg);
+        animation: rotate 6s linear infinite;
+      }
+      .water1::after {
+        content: "";
+        position: absolute;
+
+        margin-top: -20px;
+        margin-left: -20px;
+        width: 200px;
+        height: 200px;
+        border-radius: 100px;
+        opacity: 0.4;
+        background-color: rgb(173, 216, 230);
+        transform: rotate(50deg);
+        animation: rotate 6s linear infinite;
       }
     </style>
   </head>
   <body>
     <h4>html:写一个搜索框，聚焦时搜索框像左拉长并有动画效果</h4>
-    <p>思路：搜索框hover时，text动画向左移出，移出搜索图时隐藏text</p>
+    <p>
+      思路：搜索框hover时，text动画向左移出，移出搜索图时隐藏text。使用transition，伪元素::before,::after,
+    </p>
     <div class="search-box">
       <form
         action="https://cn.bing.com/search"
@@ -59,7 +237,7 @@
         class="serach-form"
         id="searchForm"
       >
-        <input type="text" class="search-input-text" />
+        <input type="text" class="search-input-text" placeholder="search..." />
         <div class="search-input-div">
           <input
             type="submit"
@@ -70,8 +248,19 @@
         </div>
       </form>
     </div>
+    <div class="container">
+      <input type="text" class="search-in" />
+      <div class="search-img">
+        <!-- <img src="s.png" alt="search" /> -->
+      </div>
+    </div>
     <h4>css：使用css画个动态的泳池特效</h4>
-    <p>思路：使用多个border-radius的div，旋转</p>
+    <p>
+      思路：使用多个border-radius的div，旋转animation,减少标签的使用，可以使用伪元素，但这样只能有三个
+    </p>
+    <div class="container-water">
+      <div class="water1"></div>
+    </div>
     <h4>js：方法：获取手机电池的信息，如电量、充电状态</h4>
     <h4>再前后端分离的项目中，前端跳转微信授权的流程？</h4>
   </body>
